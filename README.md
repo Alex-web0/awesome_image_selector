@@ -1,39 +1,60 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+# Awesome Image Selector
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages).
-
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages).
--->
-
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+The `AwesomeImageSelector` is a Flutter widget that allows you to display and select images with ease. It provides a customizable interface for selecting images and triggers a callback when the image is changed or added. This widget is perfect for scenarios where you need to offer users the ability to choose or update images within your app.
 
 ## Features
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+- Display an image within a customizable card layout.
+- Provide callbacks for handling image changes.
+- Customize the appearance of the card, including outer margins and background color.
+- Supports displaying an initial image, which can be updated through user interaction.
+- Built-in support for specifying custom text for selecting and changing images.
 
-## Getting started
+## Getting Started
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+To use the `AwesomeImageSelector` widget in your Flutter project, follow these steps:
 
-## Usage
+1. Add the package to your `pubspec.yaml` file:
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
-
-```dart
-const like = 'sample';
+```yaml
+dependencies:
+  awesome_image_selector: ^<latest_version>
 ```
 
-## Additional information
+2. Import the package in your Dart code:
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+```dart
+import 'package:awesome_image_selector/awesome_image_selector.dart';
+```
+
+3. Add the `AwesomeImageSelector` widget to your widget tree:
+
+```dart
+AwesomeImageSelector(
+  onImageChanged: (XFile file) {
+    // Handle the changed image file here
+  },
+  // can be any image, network mostly
+  initialImage: AssetImage('assets/placeholder_image.png'),
+  cardOuterMargin: EdgeInsets.all(16.0), // optional
+  bgCardColor: Colors.grey[200],
+  selectText: 'Select Image',
+  changeText: 'Change Image',
+)
+```
+
+## Example
+
+For a more comprehensive example, you can check the `/example` folder in the package repository.
+
+## Additional Information
+
+- For more details and usage examples, visit the official documentation at [https://salehwaleed.com](https://salehwaleed.com).
+- If you encounter any issues, have questions, or want to contribute to the package, please visit the [GitHub repository](https://github.com/alex-web0/awesome_image_selector).
+- This package is licensed under the MIT License.
+
+---
+
+Made with ❤️ by [Salih](https://salehwaleed.com)
+```
+
