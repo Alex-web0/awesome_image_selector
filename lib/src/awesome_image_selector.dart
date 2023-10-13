@@ -1,9 +1,9 @@
-import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:image_picker_web/image_picker_web.dart';
+import 'package:universal_html/html.dart' as html;
+import 'package:universal_image_picker_web/image_picker_web.dart';
 
 /// This does everything for you, and provides a simple callback to retrieve the image, and do
 /// whatever you want with it!
@@ -121,15 +121,22 @@ class _AwesomeImageSelectorState extends State<AwesomeImageSelector> {
   selectAndUpdateImage() async {
     XFile? imageOrNot;
 
-    try {
-      if (Platform.isAndroid || Platform.isIOS) {
-        final picker = ImagePicker();
-        imageOrNot = await picker.pickImage(source: ImageSource.gallery);
-      }
-      throw Exception();
-    } catch (e) {
-      Uint8List? imgBytes = await ImagePickerWeb.getImageAsBytes();
-      imageOrNot = imgBytes == null ? null : XFile.fromData(imgBytes);
+    html.File? imgBytes = await ImagePickerWeb.getImageAsFile();
+
+    if (imgBytes != null) {
+      // use html file reader
+      // write testsss
+      final reader = html.FileReader();
+      reader.readAsArrayBuffer(imgBytes);
+      await reader.onLoad.first;
+
+      // print(imgBytes.type);
+      // print(imgBytes.name);
+      imageOrNot = XFile.fromData(
+        reader.result as Uint8List,
+        mimeType: imgBytes.type,
+        name: imgBytes.name,
+      );
     }
 
     if (imageOrNot == null) return;
